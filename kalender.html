@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Kalender Target - JurnalKu</title>
+    <!-- Load CSS Bawaan SB Admin Pro -->
+    <link href="css/styles.css" rel="stylesheet" />
+    <!-- FontAwesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous"></script>
+    <!-- FullCalendar JS -->
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+    <style>
+        .fc-event { cursor: pointer; } 
+        /* Membuat kalender pas dengan tampilan kotak SB Admin */
+        #calendar { min-height: 600px; }
+    </style>
+</head>
+<body class="nav-fixed">
+    <!-- Topbar -->
+<nav class="topnav navbar navbar-expand-lg shadow navbar-light bg-white fixed-top">
+        <div class="container-xl px-4">
+            <a class="navbar-brand pe-3 fw-bold text-primary" href="index.html">JurnalKu Divisi IT</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <i data-feather="menu"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 mt-3 mt-lg-0 gap-2">
+                    <li class="nav-item"><a class="nav-link" href="index.html"><i data-feather="edit" class="me-1"></i> Buat Agenda</a></li>
+                    <li class="nav-item"><a class="nav-link active fw-bold text-primary" href="tabel.html"><i data-feather="database" class="me-1"></i> Database Riwayat</a></li>
+                    <li class="nav-item"><a class="nav-link" href="kalender.html"><i data-feather="calendar" class="me-1"></i> Kalender Target</a></li>
+                </ul>
+                <ul class="navbar-nav align-items-center ms-auto mt-2 mt-lg-0">
+                    <li class="nav-item dropdown no-caret dropdown-user">
+                        <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-bs-toggle="dropdown"><img class="img-fluid" src="assets/img/illustrations/profiles/profile-1.png" /></a>
+                        <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">
+                            <h6 class="dropdown-header d-flex align-items-center">
+                                <img class="dropdown-user-img" src="assets/img/illustrations/profiles/profile-1.png" />
+                                <div class="dropdown-user-details">
+                                    <div class="dropdown-user-details-name">Admin STPM</div>
+                                    <div class="dropdown-user-details-email">it.divisi@stpm.ac.id</div>
+                                </div>
+                            </h6>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div style="padding-top: 3.625rem; width: 100%;">
+        <main>
+                <!-- Page Header -->
+                <header class="page-header page-header-dark bg-info pb-10">
+                    <div class="container-xl px-4">
+                        <div class="page-header-content pt-4">
+                            <div class="row align-items-center justify-content-between">
+                                <div class="col-auto mt-4">
+                                    <h1 class="page-header-title">
+                                        <div class="page-header-icon"><i class="fa-solid fa-calendar-day"></i></div>
+                                        Kalender Target Pekerjaan
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+                
+                <!-- Main Page Content -->
+                <div class="container-xl px-4 mt-n10 mb-5">
+                    <div class="card shadow-sm">
+                        <div class="card-body p-4">
+                            <!-- Loader -->
+                            <div id="calendar-loading" class="text-center py-5">
+                                <div class="spinner-border text-info" role="status"></div>
+                                <p class="mt-2">Menyiapkan kalender...</p>
+                            </div>
+                            <!-- Elemen Kalender -->
+                            <div id="calendar" class="d-none"></div> 
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modal Pop-up Untuk Detail Kalender -->
+    <div class="modal fade" id="eventModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title"><i class="fa-solid fa-list-check me-2"></i>Rincian Agenda</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <h5 id="modalTitle" class="fw-bold text-info mb-4"></h5>
+                    
+                    <div class="d-flex align-items-center mb-2">
+                        <div class="icon-circle bg-light text-dark me-3"><i class="fa-regular fa-calendar"></i></div>
+                        <div>
+                            <div class="small text-muted">Tanggal Mulai</div>
+                            <div class="fw-bold" id="modalStart"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="icon-circle bg-light text-danger me-3"><i class="fa-regular fa-calendar-check"></i></div>
+                        <div>
+                            <div class="small text-muted">Target Selesai</div>
+                            <div class="fw-bold text-danger" id="modalEnd"></div>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    <div class="mb-3">
+                        <label class="small fw-bold text-muted text-uppercase">Deskripsi Target Akhir:</label>
+                        <div id="modalTargetDesc" class="p-3 bg-light rounded mt-1"></div>
+                    </div>
+                    
+                    <div>
+                        <label class="small fw-bold text-muted text-uppercase">Kendala Awal:</label>
+                        <div id="modalKendala" class="p-3 bg-light rounded mt-1 text-danger"></div>
+                    </div>
+                </div>
+                <div class="modal-footer bg-light">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="js/scripts.js"></script>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzRbblL6gRF6Gks-PfszVW_MoeCINaMl34Dqd1WrJKywhkAGlGxsFD0mswjX80438iX5w/exec';
+        let calendar;
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            var calendarEl = document.getElementById('calendar');
+            calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                themeSystem: 'bootstrap5',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,listWeek'
+                },
+                events: [], 
+                eventClick: function(info) {
+                    document.getElementById('modalTitle').innerText = info.event.title;
+                    
+                    let startStr = info.event.start.toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'});
+                    
+                    let endObj = new Date(info.event.endStr);
+                    endObj.setDate(endObj.getDate() - 1);
+                    let endStr = endObj.toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'});
+
+                    document.getElementById('modalStart').innerText = startStr;
+                    document.getElementById('modalEnd').innerText = endStr;
+                    document.getElementById('modalTargetDesc').innerText = info.event.extendedProps.targetDesc;
+                    document.getElementById('modalKendala').innerText = info.event.extendedProps.kendala;
+
+                    var eventModal = new bootstrap.Modal(document.getElementById('eventModal'));
+                    eventModal.show();
+                }
+            });
+            calendar.render();
+            
+            // Ambil data dan sembunyikan loader
+            await fetchCalendarData();
+        });
+
+        async function fetchCalendarData() {
+            try {
+                const response = await fetch(scriptURL);
+                const dataObj = await response.json();
+                
+                if (dataObj.result === 'success') {
+                    let calendarEvents = []; 
+
+                    dataObj.data.forEach(row => {
+                        if(row[4] !== "Hari Libur" && row[7] && row[7] !== "-") {
+                            let endDate = new Date(row[7]);
+                            endDate.setDate(endDate.getDate() + 1); 
+
+                            calendarEvents.push({
+                                title: row[3],
+                                start: row[0],
+                                end: endDate.toISOString().split('T')[0],
+                                allDay: true,
+                                backgroundColor: '#0dcaf0', // Warna template SB Admin "info"
+                                borderColor: '#0dcaf0',
+                                extendedProps: { targetDesc: row[8], kendala: row[5] }
+                            });
+                        }
+                    });
+
+                    calendar.addEventSource(calendarEvents);
+                    
+                    // Hilangkan loading, tampilkan kalender
+                    document.getElementById('calendar-loading').classList.add('d-none');
+                    document.getElementById('calendar').classList.remove('d-none');
+                    calendar.render(); // Re-render agar ukuran kotak menyesuaikan layar
+                }
+            } catch (error) { 
+                console.error("Gagal memuat data:", error);
+                document.getElementById('calendar-loading').innerHTML = '<span class="text-danger">Gagal terhubung ke Database.</span>';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,221 +1,268 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jurnal Laporan Harian V3</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body { background-color: #f4f7f6; }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-    </style>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Buat Agenda - JurnalKu</title>
+    <link href="css/styles.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
 </head>
-<body>
-
-<div class="container mt-5 mb-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8 col-lg-7">
-            <div class="card glass-card p-4">
-                <h3 class="text-center mb-4">Laporan Kerja Harian</h3>
-                
-                <div id="alertSuccess" class="alert alert-success d-none" role="alert">
-                    Laporan dan Foto berhasil disimpan!
-                </div>
-                <div id="alertError" class="alert alert-danger d-none" role="alert"></div>
-
-                <form id="formLaporan">
-                    <div class="row mb-3">
-                        <div class="col">
-                            <label for="tanggal" class="form-label">Tanggal</label>
-                            <input type="date" class="form-control" id="tanggal" required readonly>
+<body class="nav-fixed bg-light">
+    
+    <nav class="topnav navbar navbar-expand-lg shadow navbar-light bg-white fixed-top">
+        <div class="container-xl px-4">
+            <a class="navbar-brand pe-3 fw-bold text-primary" href="index.html">JurnalKu Divisi IT</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <i data-feather="menu"></i>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 mt-3 mt-lg-0 gap-2">
+                    <li class="nav-item"><a class="nav-link active fw-bold text-primary" href="index.html"><i data-feather="edit" class="me-1"></i> Buat Agenda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="tabel.html"><i data-feather="database" class="me-1"></i> Database Riwayat</a></li>
+                    <li class="nav-item"><a class="nav-link" href="kalender.html"><i data-feather="calendar" class="me-1"></i> Kalender Target</a></li>
+                </ul>
+                <ul class="navbar-nav align-items-center ms-auto mt-2 mt-lg-0">
+                    <li class="nav-item dropdown no-caret dropdown-user">
+                        <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-bs-toggle="dropdown"><img class="img-fluid" src="assets/img/illustrations/profiles/profile-1.png" /></a>
+                        <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">
+                            <h6 class="dropdown-header d-flex align-items-center">
+                                <img class="dropdown-user-img" src="assets/img/illustrations/profiles/profile-1.png" />
+                                <div class="dropdown-user-details">
+                                    <div class="dropdown-user-details-name">Admin STPM</div>
+                                    <div class="dropdown-user-details-email">it.divisi@stpm.ac.id</div>
+                                </div>
+                            </h6>
                         </div>
-                        <div class="col">
-                            <label for="waktu" class="form-label">Waktu</label>
-                            <input type="time" class="form-control" id="waktu" required>
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="status" class="form-label">Status Hari</label>
-                        <select class="form-select" id="status" required>
-                            <option value="Hari Kerja">Hari Kerja</option>
-                            <option value="Hari Libur">Hari Libur</option>
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="kegiatan" class="form-label">Jurnal Kegiatan</label>
-                        <textarea class="form-control" id="kegiatan" rows="3" placeholder="Masukkan laporan pekerjaan hari ini..." required></textarea>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="kendala" class="form-label">Kendala</label>
-                        <textarea class="form-control" id="kendala" rows="2" placeholder="Isi '-' jika tidak ada kendala" required></textarea>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="hasil_file" class="form-label">Hasil yang Dicapai (Screenshot/Foto)</label>
-                        <input class="form-control" type="file" id="hasil_file" accept="image/*" required>
-                        <small class="text-muted">Maksimal disarankan 3MB agar proses upload cepat.</small>
-                    </div>
-
-                    <div class="card p-3 mb-4 bg-light border-0">
-                        <label class="form-label fw-bold">Target Selanjutnya</label>
-                        <div class="mb-2">
-                            <label for="target_tanggal" class="form-label text-muted small mb-1">Tanggal Pencapaian</label>
-                            <input type="date" class="form-control" id="target_tanggal" required>
-                        </div>
-                        <div>
-                            <label for="target_deskripsi" class="form-label text-muted small mb-1">Deskripsi Target</label>
-                            <textarea class="form-control" id="target_deskripsi" rows="2" placeholder="Masukkan detail target pekerjaan berikutnya..." required></textarea>
-                        </div>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary w-100" id="btnSubmit">
-                        <span id="btnText">Kirim Laporan</span>
-                        <span id="btnLoading" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
-                    </button>
-                </form>
+                    </li>
+                </ul>
             </div>
         </div>
-    </div>
-</div>
-
-<script>
-    // URL Web App sudah diperbarui dengan milik Anda
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbzRbblL6gRF6Gks-PfszVW_MoeCINaMl34Dqd1WrJKywhkAGlGxsFD0mswjX80438iX5w/exec';
+    </nav>
     
-    const form = document.getElementById('formLaporan');
-    const btnSubmit = document.getElementById('btnSubmit');
-    const btnText = document.getElementById('btnText');
-    const btnLoading = document.getElementById('btnLoading');
-    const alertSuccess = document.getElementById('alertSuccess');
-    const alertError = document.getElementById('alertError');
-
-    // Fungsi membaca file menjadi Base64
-    const toBase64 = file => new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = error => reject(error);
-    });
-
-    function setWaktuDanDeteksiLibur() {
-        const now = new Date();
-        const year = now.getFullYear();
-        const month = String(now.getMonth() + 1).padStart(2, '0');
-        const day = String(now.getDate()).padStart(2, '0');
-        document.getElementById('tanggal').value = `${year}-${month}-${day}`;
-        
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        document.getElementById('waktu').value = `${hours}:${minutes}`;
-
-        const elStatus = document.getElementById('status');
-        const elKegiatan = document.getElementById('kegiatan');
-        const elKendala = document.getElementById('kendala');
-        const elHasilFile = document.getElementById('hasil_file');
-        const elTargetTgl = document.getElementById('target_tanggal');
-        const elTargetDesc = document.getElementById('target_deskripsi');
-
-        const hariIni = now.getDay();
-        
-        if (hariIni === 0 || hariIni === 6) { 
-            elStatus.value = "Hari Libur";
-            elKegiatan.value = "Hari libur. Sistem otomatis mencatat jurnal libur.";
-            elKendala.value = "-";
+    <div style="padding-top: 3.625rem; width: 100%;">
+        <main>
+            <header class="page-header page-header-dark bg-primary pb-10">
+                <div class="container-xl px-4">
+                    <div class="page-header-content pt-4">
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-auto mt-4">
+                                <h1 class="page-header-title">
+                                    <div class="page-header-icon"><i data-feather="file-plus"></i></div>
+                                    Buat Agenda & Laporan
+                                </h1>
+                                <div class="page-header-subtitle">Catat pekerjaan dan sinkronisasi target ke Google Calendar.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
             
-            elHasilFile.required = false; 
-            elTargetTgl.required = false;
-            elTargetDesc.required = false;
-            elTargetDesc.value = "-";
-        } else {
-            elKegiatan.value = "";
-            elKendala.value = "";
-            
-            elHasilFile.required = true; 
-            elTargetTgl.required = true;
-            elTargetDesc.required = true;
-            elTargetDesc.value = "";
-        }
-    }
+            <div class="container-xl px-4 mt-n10 mb-5">
+                <div class="row justify-content-center">
+                    <div class="col-xl-8 col-lg-10">
+                        <div class="card shadow-sm border-0 mb-4">
+                            <div class="card-header bg-white py-3 fw-bold">Formulir Laporan Harian</div>
+                            <div class="card-body p-4">
+                                <div id="alertSuccess" class="alert alert-success alert-icon d-none" role="alert">
+                                    <button class="btn-close" type="button" data-bs-dismiss="alert"></button>
+                                    <div class="alert-icon-aside"><i data-feather="check-circle"></i></div>
+                                    <div class="alert-icon-content"><strong>Sukses!</strong> Laporan tersimpan dan Kalender diperbarui.</div>
+                                </div>
+                                <div id="alertError" class="alert alert-danger d-none" role="alert"></div>
 
-    setWaktuDanDeteksiLibur();
+                                <form id="formLaporan">
+                                    <div class="row gx-3 mb-3">
+                                        <div class="col-md-6 mb-3 mb-md-0">
+                                            <label class="small mb-1 fw-bold text-dark">Tanggal Mulai <span class="text-primary">(Bisa Diubah)</span></label>
+                                            <input type="date" class="form-control" id="tanggal" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="small mb-1 fw-bold text-dark">Waktu Mulai</label>
+                                            <input type="time" class="form-control" id="waktu" required>
+                                        </div>
+                                    </div>
 
-    form.addEventListener('submit', async e => {
-        e.preventDefault();
+                                    <div class="mb-3">
+                                        <label class="small mb-1 fw-bold text-dark">Status Hari</label>
+                                        <select class="form-select" id="status" required>
+                                            <option value="Hari Kerja">Hari Kerja</option>
+                                            <option value="Hari Libur">Hari Libur</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="small mb-1 fw-bold text-dark">Kegiatan / Agenda</label>
+                                        <textarea class="form-control" id="kegiatan" rows="3" placeholder="Deskripsikan pekerjaan..." required></textarea>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="small mb-1 fw-bold text-dark">Kendala</label>
+                                        <textarea class="form-control" id="kendala" rows="2" placeholder="Isi '-' jika tidak ada kendala" required></textarea>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="small mb-1 fw-bold text-dark">Bukti/Hasil (Gambar)</label>
+                                        <input class="form-control" type="file" id="hasil_file" accept="image/*" required>
+                                    </div>
+
+                                    <div class="card bg-light border-start-lg border-start-primary mb-4 mt-4 shadow-none">
+                                        <div class="card-body">
+                                            <h6 class="fw-bold text-primary mb-3"><i data-feather="target" class="me-2"></i>Target Penyelesaian (Sinkron Kalender)</h6>
+                                            <div class="row gx-3">
+                                                <div class="col-md-4 mb-3 mb-md-0">
+                                                    <label class="small mb-1 fw-bold text-dark">Tanggal Selesai</label>
+                                                    <input type="date" class="form-control" id="target_tanggal" required>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="small mb-1 fw-bold text-dark">Deskripsi Hasil Akhir</label>
+                                                    <textarea class="form-control" id="target_deskripsi" rows="2" placeholder="Target penyelesaian..." required></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary w-100 fw-bold py-3" id="btnSubmit">
+                                        <span id="btnText"><i class="fas fa-paper-plane me-2"></i> Kirim & Jadwalkan Laporan</span>
+                                        <span id="btnLoading" class="spinner-border spinner-border-sm d-none" role="status"></span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
         
-        btnText.classList.add('d-none');
-        btnLoading.classList.remove('d-none');
-        btnSubmit.disabled = true;
-        alertError.classList.add('d-none');
+        <footer class="footer-admin mt-auto footer-light">
+            <div class="container-xl px-4">
+                <div class="row">
+                    <div class="col-md-6 small">Copyright &copy; JurnalKu STPM 2026</div>
+                </div>
+            </div>
+        </footer>
+    </div>
 
-        try {
-            const fileInput = document.getElementById('hasil_file');
-            let fileB64 = "";
-            let fileName = "";
-            let mimeType = "";
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/scripts.js"></script>
 
-            if (fileInput.files.length > 0) {
-                const file = fileInput.files[0];
-                fileName = file.name;
-                mimeType = file.type;
-                const base64Data = await toBase64(file);
-                fileB64 = base64Data.split(',')[1];
+    <script>
+        // Render Ikon Feather
+        feather.replace();
+
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzRbblL6gRF6Gks-PfszVW_MoeCINaMl34Dqd1WrJKywhkAGlGxsFD0mswjX80438iX5w/exec';
+        const form = document.getElementById('formLaporan');
+        
+        const toBase64 = file => new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
+
+        // Logika Otomatis Hari Libur / Kerja
+        function applyHolidayLogic(dateObj) {
+            const dayOfWeek = dateObj.getDay();
+            if (dayOfWeek === 0 || dayOfWeek === 6) { // Jika Sabtu/Minggu
+                document.getElementById('status').value = "Hari Libur";
+                document.getElementById('kegiatan').value = "Hari libur. Sistem otomatis mencatat jurnal libur.";
+                document.getElementById('kendala').value = "-";
+                document.getElementById('hasil_file').required = false; 
+                document.getElementById('target_tanggal').required = false;
+                document.getElementById('target_deskripsi').required = false;
+                document.getElementById('target_deskripsi').value = "-";
+            } else { // Jika Senin - Jumat
+                document.getElementById('status').value = "Hari Kerja";
+                document.getElementById('kegiatan').value = "";
+                document.getElementById('kendala').value = "";
+                document.getElementById('hasil_file').required = true; 
+                document.getElementById('target_tanggal').required = true;
+                document.getElementById('target_deskripsi').required = true;
+                document.getElementById('target_deskripsi').value = "";
             }
-
-            const payload = {
-                tanggal: document.getElementById('tanggal').value,
-                waktu: document.getElementById('waktu').value,
-                status: document.getElementById('status').value,
-                kegiatan: document.getElementById('kegiatan').value,
-                kendala: document.getElementById('kendala').value,
-                targetTanggal: document.getElementById('target_tanggal').value,
-                targetDeskripsi: document.getElementById('target_deskripsi').value,
-                fileB64: fileB64,
-                fileName: fileName,
-                mimeType: mimeType
-            };
-
-            const response = await fetch(scriptURL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'text/plain;charset=utf-8', 
-                },
-                body: JSON.stringify(payload)
-            });
-
-            const data = await response.json();
-
-            if (data.result === 'success') {
-                alertSuccess.classList.remove('d-none');
-                form.reset();
-                setWaktuDanDeteksiLibur(); 
-                
-                setTimeout(() => {
-                    alertSuccess.classList.add('d-none');
-                }, 4000);
-            } else {
-                throw new Error(data.message);
-            }
-
-        } catch (error) {
-            console.error('Error!', error);
-            alertError.innerText = "Gagal mengirim laporan: " + error.message;
-            alertError.classList.remove('d-none');
-        } finally {
-            btnText.classList.remove('d-none');
-            btnLoading.classList.add('d-none');
-            btnSubmit.disabled = false;
         }
-    });
-</script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        // Set Default Saat Halaman Dimuat
+        function initializeForm() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            document.getElementById('tanggal').value = `${year}-${month}-${day}`;
+            
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            document.getElementById('waktu').value = `${hours}:${minutes}`;
+
+            applyHolidayLogic(now);
+        }
+        initializeForm();
+
+        // JIKA PENGGUNA MENGUBAH TANGGAL MANUAL, cek apakah itu hari libur atau kerja
+        document.getElementById('tanggal').addEventListener('change', function() {
+            if(this.value) {
+                applyHolidayLogic(new Date(this.value));
+            }
+        });
+
+        // Proses Submit Form
+        form.addEventListener('submit', async e => {
+            e.preventDefault();
+            
+            document.getElementById('btnText').classList.add('d-none');
+            document.getElementById('btnLoading').classList.remove('d-none');
+            document.getElementById('btnSubmit').disabled = true;
+            document.getElementById('alertError').classList.add('d-none');
+            document.getElementById('alertSuccess').classList.add('d-none');
+
+            try {
+                const fileInput = document.getElementById('hasil_file');
+                let fileB64 = "", fileName = "", mimeType = "";
+
+                if (fileInput.files.length > 0) {
+                    const file = fileInput.files[0];
+                    fileName = file.name;
+                    mimeType = file.type;
+                    const base64Data = await toBase64(file);
+                    fileB64 = base64Data.split(',')[1];
+                }
+
+                const payload = {
+                    tanggal: document.getElementById('tanggal').value,
+                    waktu: document.getElementById('waktu').value,
+                    status: document.getElementById('status').value,
+                    kegiatan: document.getElementById('kegiatan').value,
+                    kendala: document.getElementById('kendala').value,
+                    targetTanggal: document.getElementById('target_tanggal').value,
+                    targetDeskripsi: document.getElementById('target_deskripsi').value,
+                    fileB64: fileB64, fileName: fileName, mimeType: mimeType
+                };
+
+                const response = await fetch(scriptURL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+
+                if (data.result === 'success') {
+                    document.getElementById('alertSuccess').classList.remove('d-none');
+                    form.reset();
+                    initializeForm(); // Reset kembali ke waktu saat ini setelah terkirim
+                } else { throw new Error(data.message); }
+
+            } catch (error) {
+                document.getElementById('alertError').innerText = "Gagal: " + error.message;
+                document.getElementById('alertError').classList.remove('d-none');
+            } finally {
+                document.getElementById('btnText').classList.remove('d-none');
+                document.getElementById('btnLoading').classList.add('d-none');
+                document.getElementById('btnSubmit').disabled = false;
+            }
+        });
+    </script>
 </body>
 </html>
