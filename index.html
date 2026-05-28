@@ -87,8 +87,8 @@
 </div>
 
 <script>
-    // MASUKKAN URL APLIKASI WEB ANDA DI SINI
-    const scriptURL = 'MASUKKAN_URL_WEB_APP_GOOGLE_APPS_SCRIPT_DISINI';
+    // URL Web App sudah diperbarui dengan milik Anda
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzRbblL6gRF6Gks-PfszVW_MoeCINaMl34Dqd1WrJKywhkAGlGxsFD0mswjX80438iX5w/exec';
     
     const form = document.getElementById('formLaporan');
     const btnSubmit = document.getElementById('btnSubmit');
@@ -116,7 +116,6 @@
         const minutes = String(now.getMinutes()).padStart(2, '0');
         document.getElementById('waktu').value = `${hours}:${minutes}`;
 
-        // Elemen input yang perlu dimanipulasi
         const elStatus = document.getElementById('status');
         const elKegiatan = document.getElementById('kegiatan');
         const elKendala = document.getElementById('kendala');
@@ -126,12 +125,11 @@
 
         const hariIni = now.getDay();
         
-        if (hariIni === 0 || hariIni === 6) { // Jika Sabtu atau Minggu
+        if (hariIni === 0 || hariIni === 6) { 
             elStatus.value = "Hari Libur";
             elKegiatan.value = "Hari libur. Sistem otomatis mencatat jurnal libur.";
             elKendala.value = "-";
             
-            // Menghapus atribut required agar form tetap bisa dikirim saat hari libur (tanpa upload foto)
             elHasilFile.required = false; 
             elTargetTgl.required = false;
             elTargetDesc.required = false;
@@ -140,7 +138,6 @@
             elKegiatan.value = "";
             elKendala.value = "";
             
-            // Mengembalikan atribut required untuk hari kerja
             elHasilFile.required = true; 
             elTargetTgl.required = true;
             elTargetDesc.required = true;
@@ -164,17 +161,14 @@
             let fileName = "";
             let mimeType = "";
 
-            // Jika ada file yang dipilih (saat hari kerja)
             if (fileInput.files.length > 0) {
                 const file = fileInput.files[0];
                 fileName = file.name;
                 mimeType = file.type;
                 const base64Data = await toBase64(file);
-                // Memotong header data:image/png;base64, agar hanya tersisa datanya
                 fileB64 = base64Data.split(',')[1];
             }
 
-            // Susun data dalam bentuk Object
             const payload = {
                 tanggal: document.getElementById('tanggal').value,
                 waktu: document.getElementById('waktu').value,
@@ -188,11 +182,10 @@
                 mimeType: mimeType
             };
 
-            // Kirim menggunakan Fetch API dengan payload JSON
             const response = await fetch(scriptURL, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'text/plain;charset=utf-8', // Menghindari masalah CORS preflight
+                    'Content-Type': 'text/plain;charset=utf-8', 
                 },
                 body: JSON.stringify(payload)
             });
