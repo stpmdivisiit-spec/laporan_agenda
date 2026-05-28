@@ -16,6 +16,24 @@
         /* Membuat kalender pas dengan tampilan kotak SB Admin */
         #calendar { min-height: 600px; }
     </style>
+
+<style>
+        /* Fix Navbar Mobile Transparent */
+        @media (max-width: 991.98px) {
+            #navbarCollapse {
+                background-color: #ffffff;
+                position: absolute;
+                top: 3.625rem; 
+                left: 0;
+                width: 100%;
+                padding: 1rem 1.5rem;
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+                border-top: 1px solid #eaecf4;
+                z-index: 1050;
+            }
+        }
+    </style>
+
 </head>
 <body class="nav-fixed">
     <!-- Topbar -->
@@ -31,20 +49,7 @@
                     <li class="nav-item"><a class="nav-link active fw-bold text-primary" href="tabel.html"><i data-feather="database" class="me-1"></i> Database Riwayat</a></li>
                     <li class="nav-item"><a class="nav-link" href="kalender.html"><i data-feather="calendar" class="me-1"></i> Kalender Target</a></li>
                 </ul>
-                <ul class="navbar-nav align-items-center ms-auto mt-2 mt-lg-0">
-                    <li class="nav-item dropdown no-caret dropdown-user">
-                        <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-bs-toggle="dropdown"><img class="img-fluid" src="assets/img/illustrations/profiles/profile-1.png" /></a>
-                        <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">
-                            <h6 class="dropdown-header d-flex align-items-center">
-                                <img class="dropdown-user-img" src="assets/img/illustrations/profiles/profile-1.png" />
-                                <div class="dropdown-user-details">
-                                    <div class="dropdown-user-details-name">Admin STPM</div>
-                                    <div class="dropdown-user-details-email">it.divisi@stpm.ac.id</div>
-                                </div>
-                            </h6>
-                        </div>
-                    </li>
-                </ul>
+
             </div>
         </div>
     </nav>
