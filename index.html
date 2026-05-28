@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurnal Laporan Harian V3</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f4f7f6; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-7">
+            <div class="card glass-card p-4">
+                <h3 class="text-center mb-4">Laporan Kerja Harian</h3>
+                
+                <div id="alertSuccess" class="alert alert-success d-none" role="alert">
+                    Laporan dan Foto berhasil disimpan!
+                </div>
+                <div id="alertError" class="alert alert-danger d-none" role="alert"></div>
+
+                <form id="formLaporan">
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label for="tanggal" class="form-label">Tanggal</label>
+                            <input type="date" class="form-control" id="tanggal" required readonly>
+                        </div>
+                        <div class="col">
+                            <label for="waktu" class="form-label">Waktu</label>
+                            <input type="time" class="form-control" id="waktu" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="status" class="form-label">Status Hari</label>
+                        <select class="form-select" id="status" required>
+                            <option value="Hari Kerja">Hari Kerja</option>
+                            <option value="Hari Libur">Hari Libur</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="kegiatan" class="form-label">Jurnal Kegiatan</label>
+                        <textarea class="form-control" id="kegiatan" rows="3" placeholder="Masukkan laporan pekerjaan hari ini..." required></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="kendala" class="form-label">Kendala</label>
+                        <textarea class="form-control" id="kendala" rows="2" placeholder="Isi '-' jika tidak ada kendala" required></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="hasil_file" class="form-label">Hasil yang Dicapai (Screenshot/Foto)</label>
+                        <input class="form-control" type="file" id="hasil_file" accept="image/*" required>
+                        <small class="text-muted">Maksimal disarankan 3MB agar proses upload cepat.</small>
+                    </div>
+
+                    <div class="card p-3 mb-4 bg-light border-0">
+                        <label class="form-label fw-bold">Target Selanjutnya</label>
+                        <div class="mb-2">
+                            <label for="target_tanggal" class="form-label text-muted small mb-1">Tanggal Pencapaian</label>
+                            <input type="date" class="form-control" id="target_tanggal" required>
+                        </div>
+                        <div>
+                            <label for="target_deskripsi" class="form-label text-muted small mb-1">Deskripsi Target</label>
+                            <textarea class="form-control" id="target_deskripsi" rows="2" placeholder="Masukkan detail target pekerjaan berikutnya..." required></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100" id="btnSubmit">
+                        <span id="btnText">Kirim Laporan</span>
+                        <span id="btnLoading" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // MASUKKAN URL APLIKASI WEB ANDA DI SINI
+    const scriptURL = 'MASUKKAN_URL_WEB_APP_GOOGLE_APPS_SCRIPT_DISINI';
+    
+    const form = document.getElementById('formLaporan');
+    const btnSubmit = document.getElementById('btnSubmit');
+    const btnText = document.getElementById('btnText');
+    const btnLoading = document.getElementById('btnLoading');
+    const alertSuccess = document.getElementById('alertSuccess');
+    const alertError = document.getElementById('alertError');
+
+    // Fungsi membaca file menjadi Base64
+    const toBase64 = file => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
+
+    function setWaktuDanDeteksiLibur() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        document.getElementById('tanggal').value = `${year}-${month}-${day}`;
+        
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        document.getElementById('waktu').value = `${hours}:${minutes}`;
+
+        // Elemen input yang perlu dimanipulasi
+        const elStatus = document.getElementById('status');
+        const elKegiatan = document.getElementById('kegiatan');
+        const elKendala = document.getElementById('kendala');
+        const elHasilFile = document.getElementById('hasil_file');
+        const elTargetTgl = document.getElementById('target_tanggal');
+        const elTargetDesc = document.getElementById('target_deskripsi');
+
+        const hariIni = now.getDay();
+        
+        if (hariIni === 0 || hariIni === 6) { // Jika Sabtu atau Minggu
+            elStatus.value = "Hari Libur";
+            elKegiatan.value = "Hari libur. Sistem otomatis mencatat jurnal libur.";
+            elKendala.value = "-";
+            
+            // Menghapus atribut required agar form tetap bisa dikirim saat hari libur (tanpa upload foto)
+            elHasilFile.required = false; 
+            elTargetTgl.required = false;
+            elTargetDesc.required = false;
+            elTargetDesc.value = "-";
+        } else {
+            elKegiatan.value = "";
+            elKendala.value = "";
+            
+            // Mengembalikan atribut required untuk hari kerja
+            elHasilFile.required = true; 
+            elTargetTgl.required = true;
+            elTargetDesc.required = true;
+            elTargetDesc.value = "";
+        }
+    }
+
+    setWaktuDanDeteksiLibur();
+
+    form.addEventListener('submit', async e => {
+        e.preventDefault();
+        
+        btnText.classList.add('d-none');
+        btnLoading.classList.remove('d-none');
+        btnSubmit.disabled = true;
+        alertError.classList.add('d-none');
+
+        try {
+            const fileInput = document.getElementById('hasil_file');
+            let fileB64 = "";
+            let fileName = "";
+            let mimeType = "";
+
+            // Jika ada file yang dipilih (saat hari kerja)
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                fileName = file.name;
+                mimeType = file.type;
+                const base64Data = await toBase64(file);
+                // Memotong header data:image/png;base64, agar hanya tersisa datanya
+                fileB64 = base64Data.split(',')[1];
+            }
+
+            // Susun data dalam bentuk Object
+            const payload = {
+                tanggal: document.getElementById('tanggal').value,
+                waktu: document.getElementById('waktu').value,
+                status: document.getElementById('status').value,
+                kegiatan: document.getElementById('kegiatan').value,
+                kendala: document.getElementById('kendala').value,
+                targetTanggal: document.getElementById('target_tanggal').value,
+                targetDeskripsi: document.getElementById('target_deskripsi').value,
+                fileB64: fileB64,
+                fileName: fileName,
+                mimeType: mimeType
+            };
+
+            // Kirim menggunakan Fetch API dengan payload JSON
+            const response = await fetch(scriptURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/plain;charset=utf-8', // Menghindari masalah CORS preflight
+                },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await response.json();
+
+            if (data.result === 'success') {
+                alertSuccess.classList.remove('d-none');
+                form.reset();
+                setWaktuDanDeteksiLibur(); 
+                
+                setTimeout(() => {
+                    alertSuccess.classList.add('d-none');
+                }, 4000);
+            } else {
+                throw new Error(data.message);
+            }
+
+        } catch (error) {
+            console.error('Error!', error);
+            alertError.innerText = "Gagal mengirim laporan: " + error.message;
+            alertError.classList.remove('d-none');
+        } finally {
+            btnText.classList.remove('d-none');
+            btnLoading.classList.add('d-none');
+            btnSubmit.disabled = false;
+        }
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
