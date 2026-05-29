@@ -185,34 +185,53 @@
                 
                 if (dataObj.result === 'success') {
                     let calendarEvents = []; 
+                    
+                    // Palet warna yang cantik dan elegan (Bootstrap 5 / SB Admin Palette)
+                    const paletWarna = [
+                        '#0d6efd', // Primary (Biru Tua)
+                        '#198754', // Success (Hijau)
+                        '#6f42c1', // Purple (Ungu)
+                        '#f6c23e', // Warning (Kuning/Oranye)
+                        '#e74a3b', // Danger (Merah)
+                        '#0dcaf0', // Info (Biru Muda)
+                        '#e83e8c', // Pink
+                        '#20c997'  // Teal (Hijau Kebiruan)
+                    ];
+                    
+                    let indeksWarna = 0; // Variabel untuk merotasi warna
 
                     dataObj.data.forEach(row => {
+                        // Cek apakah bukan hari libur dan punya target tanggal
                         if(row[4] !== "Hari Libur" && row[7] && row[7] !== "-") {
                             let endDate = new Date(row[7]);
                             endDate.setDate(endDate.getDate() + 1); 
+                            
+                            // Ambil warna sesuai urutan, jika sudah habis kembali ke awal (modulo)
+                            let warnaDipilih = paletWarna[indeksWarna % paletWarna.length];
+                            indeksWarna++; // Tambah 1 untuk agenda berikutnya
 
                             calendarEvents.push({
-                                title: row[3],
-                                start: row[0],
+                                title: row[3], 
+                                start: row[0], 
                                 end: endDate.toISOString().split('T')[0],
-                                allDay: true,
-                                backgroundColor: '#0dcaf0', // Warna template SB Admin "info"
-                                borderColor: '#0dcaf0',
+                                allDay: true, 
+                                backgroundColor: warnaDipilih, 
+                                borderColor: warnaDipilih,
+                                // Agar teks tetap kontras saat background warna kuning/terang
+                                textColor: (warnaDipilih === '#f6c23e' || warnaDipilih === '#0dcaf0') ? '#000000' : '#ffffff',
                                 extendedProps: { targetDesc: row[8], kendala: row[5] }
                             });
                         }
                     });
 
                     calendar.addEventSource(calendarEvents);
-                    
-                    // Hilangkan loading, tampilkan kalender
                     document.getElementById('calendar-loading').classList.add('d-none');
                     document.getElementById('calendar').classList.remove('d-none');
-                    calendar.render(); // Re-render agar ukuran kotak menyesuaikan layar
+                    calendar.render(); 
                 }
             } catch (error) { 
                 console.error("Gagal memuat data:", error);
-                document.getElementById('calendar-loading').innerHTML = '<span class="text-danger">Gagal terhubung ke Database.</span>';
+                document.getElementById('calendar-loading').innerHTML = '<span class="text-danger fw-bold"><i class="fas fa-exclamation-triangle me-2"></i>Gagal terhubung ke Database Spreadsheet.</span>';
             }
         }
     </script>
