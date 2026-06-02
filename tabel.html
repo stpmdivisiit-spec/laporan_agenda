@@ -5,14 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Database Laporan - JurnalKu</title>
-    <!-- Load CSS Bawaan SB Admin Pro -->
     <link href="css/styles.css" rel="stylesheet" />
-    <!-- DataTables CSS Bootstrap 5 -->
     <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
-    <!-- FontAwesome -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous"></script>
 
-<style>
+    <style>
         /* Fix Navbar Mobile Transparent */
         @media (max-width: 991.98px) {
             #navbarCollapse {
@@ -28,25 +25,19 @@
             }
         }
     </style>
-
-
 </head>
-<body class="nav-fixed">
-    <!-- Topbar -->
-
-
-
+<body class="nav-fixed bg-light">
     <nav class="topnav navbar navbar-expand-lg shadow navbar-light bg-white fixed-top">
         <div class="container-xl px-4">
             <a class="navbar-brand pe-3 fw-bold text-primary" href="index.html">JurnalKu Divisi IT</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                <i data-feather="menu"></i>
+                <i class="fa-solid fa-bars"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 mt-3 mt-lg-0 gap-2">
-                    <li class="nav-item"><a class="nav-link" href="index.html"><i data-feather="edit" class="me-1"></i> Buat Agenda</a></li>
-                    <li class="nav-item"><a class="nav-link active fw-bold text-primary" href="tabel.html"><i data-feather="database" class="me-1"></i> Database Riwayat</a></li>
-                    <li class="nav-item"><a class="nav-link" href="kalender.html"><i data-feather="calendar" class="me-1"></i> Kalender Target</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="fa-solid fa-pen-to-square me-1"></i> Buat Agenda</a></li>
+                    <li class="nav-item"><a class="nav-link active fw-bold text-primary" href="tabel.html"><i class="fa-solid fa-table me-1"></i> Database Riwayat</a></li>
+                    <li class="nav-item"><a class="nav-link" href="kalender.html"><i class="fa-solid fa-calendar-days me-1"></i> Kalender Target</a></li>
                 </ul>
                 <ul class="navbar-nav align-items-center ms-auto mt-2 mt-lg-0">
                     <li class="nav-item dropdown no-caret dropdown-user">
@@ -68,67 +59,77 @@
     
     <div style="padding-top: 3.625rem; width: 100%;">
         <main>
-                <!-- Page Header -->
-                <header class="page-header page-header-dark bg-success pb-10">
-                    <div class="container-xl px-4">
-                        <div class="page-header-content pt-4">
-                            <div class="row align-items-center justify-content-between">
-                                <div class="col-auto mt-4">
-                                    <h1 class="page-header-title">
-                                        <div class="page-header-icon"><i class="fa-solid fa-table"></i></div>
-                                        Database Riwayat Pekerjaan
-                                    </h1>
-                                </div>
-                                <div class="col-12 col-xl-auto mt-4">
-                                    <button class="btn btn-white text-success me-2" onclick="downloadExcel()">
-                                        <i class="fa-solid fa-file-excel me-2"></i>Export Excel
-                                    </button>
-                                    <button class="btn btn-dark" onclick="copyLink(event)">
-                                        <i class="fa-solid fa-link me-2"></i>Copy Link Sheet
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </header>
-                
-                <!-- Main Page Content -->
-                <div class="container-xl px-4 mt-n10">
-                    <div class="card shadow-sm mb-4">
-                        <div class="card-header border-bottom">
-                            <ul class="nav nav-tabs card-header-tabs" id="cardTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="overview-tab" href="#overview" data-bs-toggle="tab" role="tab" aria-controls="overview" aria-selected="true">Overview Data</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table id="tabelLaporan" class="table table-bordered table-hover w-100 align-middle">
-                                    <thead class="table-light">
-                                        <tr>
-                                            <th>Tanggal</th><th>Mulai</th><th>Selesai</th><th>Kegiatan</th>
-                                            <th>Status</th><th>Kendala</th><th>Bukti Foto</th><th>Tgl Target</th><th>Desc Target</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </main>
-            <footer class="footer-admin mt-auto footer-light">
+            <header class="page-header page-header-dark bg-success pb-10">
                 <div class="container-xl px-4">
-                    <div class="row">
-                        <div class="col-md-6 small">Copyright &copy; Sistem Pelaporan Divisi IT 2026</div>
+                    <div class="page-header-content pt-4">
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-auto mt-4">
+                                <h1 class="page-header-title">
+                                    <div class="page-header-icon"><i class="fa-solid fa-table"></i></div>
+                                    Database Riwayat Pekerjaan
+                                </h1>
+                            </div>
+                            <div class="col-12 col-xl-auto mt-4">
+                                <button class="btn btn-white text-success me-2" onclick="downloadExcel()">
+                                    <i class="fa-solid fa-file-excel me-2"></i>Export Excel
+                                </button>
+                                <button class="btn btn-dark" onclick="copyLink(event)">
+                                    <i class="fa-solid fa-link me-2"></i>Copy Link Sheet
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </footer>
-        </div>
+            </header>
+            
+            <div class="container-xl px-4 mt-n10 mb-5">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header border-bottom bg-white">
+                        <ul class="nav nav-tabs card-header-tabs" id="cardTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active fw-bold text-success" id="overview-tab" href="#overview" data-bs-toggle="tab" role="tab" aria-controls="overview" aria-selected="true">Overview Data</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        
+                        <div class="row mb-4 p-3 bg-light rounded border">
+                            <div class="col-md-4 mb-2 mb-md-0">
+                                <label for="minDate" class="form-label fw-bold small text-muted"><i class="fa-regular fa-calendar me-1"></i> Mulai Tanggal</label>
+                                <input type="date" id="minDate" class="form-control">
+                            </div>
+                            <div class="col-md-4 mb-2 mb-md-0">
+                                <label for="maxDate" class="form-label fw-bold small text-muted"><i class="fa-regular fa-calendar-check me-1"></i> Sampai Tanggal</label>
+                                <input type="date" id="maxDate" class="form-control">
+                            </div>
+                            <div class="col-md-4 d-flex align-items-end">
+                                <button id="btnResetFilter" class="btn btn-outline-secondary w-100"><i class="fa-solid fa-rotate-right me-2"></i>Reset Filter</button>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="tabelLaporan" class="table table-bordered table-hover w-100 align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Tanggal</th><th>Mulai</th><th>Selesai</th><th>Kegiatan</th>
+                                        <th>Status</th><th>Kendala</th><th>Bukti Foto</th><th>Tgl Target</th><th>Desc Target</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="footer-admin mt-auto footer-light">
+            <div class="container-xl px-4">
+                <div class="row">
+                    <div class="col-md-6 small">Copyright &copy; Sistem Pelaporan Divisi IT 2026</div>
+                </div>
+            </div>
+        </footer>
     </div>
 
-    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="js/scripts.js"></script>
@@ -148,6 +149,58 @@
             });
         }
 
+        // ==========================================
+        // LOGIKA FILTER TANGGAL DATATABLES (BARU)
+        // ==========================================
+        $.fn.dataTable.ext.search.push(
+            function(settings, data, dataIndex) {
+                let minDateStr = $('#minDate').val();
+                let maxDateStr = $('#maxDate').val();
+                let tableDateStr = data[0]; // Mengambil data dari Kolom Tanggal (Index 0)
+
+                // Jika input filter kosong, tampilkan semua data
+                if (!minDateStr && !maxDateStr) {
+                    return true;
+                }
+
+                // Normalisasi string ke bentuk Date Javascript untuk perbandingan akurat
+                let minDate = minDateStr ? new Date(minDateStr) : null;
+                let maxDate = maxDateStr ? new Date(maxDateStr) : null;
+                let tableDate = new Date(tableDateStr);
+
+                // Hilangkan waktu jam agar komparasi murni pada tanggalnya saja
+                if (minDate) minDate.setHours(0,0,0,0);
+                if (maxDate) maxDate.setHours(0,0,0,0);
+                if (!isNaN(tableDate.getTime())) tableDate.setHours(0,0,0,0);
+
+                if (minDate && maxDate) {
+                    return tableDate >= minDate && tableDate <= maxDate;
+                } else if (minDate) {
+                    return tableDate >= minDate;
+                } else if (maxDate) {
+                    return tableDate <= maxDate;
+                }
+                return true;
+            }
+        );
+
+        // Event listener saat input kalender diubah
+        $('#minDate, #maxDate').on('change', function () {
+            if (dataTable) {
+                dataTable.draw(); // Merender ulang tabel sesuai filter
+            }
+        });
+
+        // Tombol Reset Filter
+        $('#btnResetFilter').on('click', function() {
+            $('#minDate').val('');
+            $('#maxDate').val('');
+            if (dataTable) {
+                dataTable.draw(); 
+            }
+        });
+        // ==========================================
+
         async function loadTableData() {
             try {
                 if(dataTable) $('#tabelLaporan tbody').html('<tr><td colspan="9" class="text-center py-4"><div class="spinner-border text-success"></div><p>Memuat data...</p></td></tr>');
@@ -166,7 +219,7 @@
                     if (dataTable) dataTable.destroy();
                     dataTable = $('#tabelLaporan').DataTable({
                         data: formattedData,
-                        order: [[0, "desc"], [1, "desc"]],
+                        order: [[0, "desc"], [1, "desc"]], // Mengurutkan descending otomatis (data terbaru di atas)
                         language: { url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/id.json' }
                     });
                 }
