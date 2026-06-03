@@ -43,9 +43,10 @@
             <!-- Menu Utama (Disembunyikan jika belum login) -->
             <div class="collapse navbar-collapse d-none" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 mt-3 mt-lg-0 gap-2">
-                    <li class="nav-item"><a class="nav-link active fw-bold text-primary" href="index.html"><i data-feather="monitor" class="me-1"></i> Dashboard & Job Desc</a></li>
-                    <li class="nav-item"><a class="nav-link" href="tabel.html"><i data-feather="database" class="me-1"></i> Database Riwayat</a></li>
-                    <li class="nav-item"><a class="nav-link" href="kalender.html"><i data-feather="calendar" class="me-1"></i> Kalender Target</a></li>
+                    <li class="nav-item"><a class="nav-link active fw-bold text-primary" href="index.html"> Dashboard & Job Desc</a></li>
+                    <li class="nav-item"><a class="nav-link" href="tabel.html"> Database Riwayat</a></li>
+                    <li class="nav-item"><a class="nav-link" href="absensi_labkom.html">Hasil Absensi</a></li>
+                    <li class="nav-item"><a class="nav-link" href="kalender.html">Kalender Target</a></li>
                 </ul>
                 <ul class="navbar-nav align-items-center ms-auto mt-2 mt-lg-0">
                     <li class="nav-item d-none d-lg-block me-3">
@@ -403,8 +404,8 @@
         feather.replace();
 
         // --- SISTEM AUTENTIKASI 5 MENIT ---
-        const LOGIN_USER = "admin";
-        const LOGIN_PASS = "stpm2026"; 
+        const LOGIN_USER = "oznovel";
+        const LOGIN_PASS = "novel"; 
         const SESSION_DURATION = 5 * 60 * 1000; 
         let authCheckInterval;
 
