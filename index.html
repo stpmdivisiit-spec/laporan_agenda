@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Dashboard & Job Desc - JurnalKu</title>
+    <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0d6efd">
     <!-- Load CSS SB Admin Pro -->
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"></script>
@@ -43,10 +45,9 @@
             <!-- Menu Utama (Disembunyikan jika belum login) -->
             <div class="collapse navbar-collapse d-none" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 mt-3 mt-lg-0 gap-2">
-                    <li class="nav-item"><a class="nav-link active fw-bold text-primary" href="index.html"> Dashboard & Job Desc</a></li>
-                    <li class="nav-item"><a class="nav-link" href="tabel.html"> Database Riwayat</a></li>
-                    <li class="nav-item"><a class="nav-link" href="absensi_labkom.html">Hasil Absensi</a></li>
-                    <li class="nav-item"><a class="nav-link" href="kalender.html">Kalender Target</a></li>
+                    <li class="nav-item"><a class="nav-link active fw-bold text-primary" href="index.html"><i data-feather="monitor" class="me-1"></i> Dashboard & Job Desc</a></li>
+                    <li class="nav-item"><a class="nav-link" href="tabel.html"><i data-feather="database" class="me-1"></i> Database Riwayat</a></li>
+                    <li class="nav-item"><a class="nav-link" href="kalender.html"><i data-feather="calendar" class="me-1"></i> Kalender Target</a></li>
                 </ul>
                 <ul class="navbar-nav align-items-center ms-auto mt-2 mt-lg-0">
                     <li class="nav-item d-none d-lg-block me-3">
@@ -251,7 +252,7 @@
                                     <div class="list-group list-group-flush rounded-bottom">
                                         <div class="list-group-item bg-transparent text-dark border-light p-4">
                                             <span class="badge bg-primary mb-2">Agenda Harian</span><br>
-                                            <small class="text-muted">
+                                            <small class="text-dark">
                                                 <strong>06.30 - 07.00:</strong> Cek jaringan & server<br>
                                                 <strong>07.00 - 12.00:</strong> KBM di kelas<br>
                                                 <strong>12.00 - 13.00:</strong> Istirahat<br>
@@ -344,37 +345,40 @@
                                             </select>
                                         </div>
 
-                                        <div class="mb-3">
-                                            <label class="small mb-1 fw-bold text-dark">Kegiatan / Agenda</label>
-                                            <textarea class="form-control" id="kegiatan" rows="3" placeholder="Deskripsikan pekerjaan..." required></textarea>
-                                        </div>
+                                        <!-- INPUTS YANG AKAN DI-LOCK SAAT HARI LIBUR -->
+                                        <fieldset id="fieldLaporan">
+                                            <div class="mb-3">
+                                                <label class="small mb-1 fw-bold text-dark">Kegiatan / Agenda</label>
+                                                <textarea class="form-control bg-white" id="kegiatan" rows="3" placeholder="Deskripsikan pekerjaan..." required></textarea>
+                                            </div>
 
-                                        <div class="mb-3">
-                                            <label class="small mb-1 fw-bold text-dark">Kendala</label>
-                                            <textarea class="form-control" id="kendala" rows="2" placeholder="Isi '-' jika tidak ada kendala" required></textarea>
-                                        </div>
+                                            <div class="mb-3">
+                                                <label class="small mb-1 fw-bold text-dark">Kendala</label>
+                                                <textarea class="form-control bg-white" id="kendala" rows="2" placeholder="Isi '-' jika tidak ada kendala" required></textarea>
+                                            </div>
 
-                                        <div class="mb-3">
-                                            <label class="small mb-1 fw-bold text-dark">Bukti/Hasil (Gambar)</label>
-                                            <input class="form-control" type="file" id="hasil_file" accept="image/*" required>
-                                        </div>
+                                            <div class="mb-3">
+                                                <label class="small mb-1 fw-bold text-dark">Bukti/Hasil (Gambar)</label>
+                                                <input class="form-control" type="file" id="hasil_file" accept="image/*" required>
+                                            </div>
 
-                                        <!-- Bagian Target -->
-                                        <div class="card bg-light border-start-lg border-start-info mb-4 mt-4 shadow-none">
-                                            <div class="card-body">
-                                                <h6 class="fw-bold text-info mb-3"><i data-feather="target" class="me-2"></i>Target Penyelesaian (Sinkron Kalender)</h6>
-                                                <div class="row gx-3">
-                                                    <div class="col-md-4 mb-3 mb-md-0">
-                                                        <label class="small mb-1 fw-bold text-dark">Tanggal Selesai</label>
-                                                        <input type="date" class="form-control" id="target_tanggal" required>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <label class="small mb-1 fw-bold text-dark">Deskripsi Hasil Akhir</label>
-                                                        <textarea class="form-control" id="target_deskripsi" rows="2" placeholder="Target penyelesaian..." required></textarea>
+                                            <!-- Bagian Target -->
+                                            <div class="card bg-light border-start-lg border-start-info mb-4 mt-4 shadow-none">
+                                                <div class="card-body">
+                                                    <h6 class="fw-bold text-info mb-3"><i data-feather="target" class="me-2"></i>Target Penyelesaian (Sinkron Kalender)</h6>
+                                                    <div class="row gx-3">
+                                                        <div class="col-md-4 mb-3 mb-md-0">
+                                                            <label class="small mb-1 fw-bold text-dark">Tanggal Selesai</label>
+                                                            <input type="date" class="form-control bg-white" id="target_tanggal" required>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <label class="small mb-1 fw-bold text-dark">Deskripsi Hasil Akhir</label>
+                                                            <textarea class="form-control bg-white" id="target_deskripsi" rows="2" placeholder="Target penyelesaian..." required></textarea>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </fieldset>
 
                                         <button type="submit" class="btn btn-primary w-100 fw-bold py-3" id="btnSubmit">
                                             <span id="btnText"><i class="fas fa-paper-plane me-2"></i> Kirim & Jadwalkan Laporan</span>
@@ -470,25 +474,73 @@
             reader.onerror = error => reject(error);
         });
 
-        function applyHolidayLogic(dateObj) {
+        // FUNGSI UNTUK MEMERIKSA STATUS VALIDASI FORM
+        function checkFormValidation() {
+            const tanggalVal = document.getElementById('tanggal').value;
+            const waktuVal = document.getElementById('waktu').value;
+            const statusVal = document.getElementById('status').value;
+            const fieldLaporan = document.getElementById('fieldLaporan');
+            const btnSubmit = document.getElementById('btnSubmit');
+
+            if (!tanggalVal || !waktuVal) {
+                document.getElementById('status').disabled = true;
+                fieldLaporan.disabled = true;
+                btnSubmit.disabled = true;
+                return;
+            } else {
+                document.getElementById('status').disabled = false;
+                btnSubmit.disabled = false;
+            }
+
+            if (statusVal === "Hari Libur") {
+                document.getElementById('kegiatan').value = "Hari libur. Sistem otomatis mencatat jurnal libur.";
+                document.getElementById('kegiatan').setAttribute("readonly", true);
+                
+                document.getElementById('kendala').value = "-";
+                document.getElementById('kendala').setAttribute("readonly", true);
+                
+                document.getElementById('hasil_file').disabled = true;
+                document.getElementById('hasil_file').required = false;
+                
+                document.getElementById('target_tanggal').setAttribute("readonly", true);
+                document.getElementById('target_tanggal').required = false;
+                
+                document.getElementById('target_deskripsi').value = "-";
+                document.getElementById('target_deskripsi').setAttribute("readonly", true);
+                document.getElementById('target_deskripsi').required = false;
+            } 
+            else {
+                document.getElementById('kegiatan').value = "";
+                document.getElementById('kegiatan').removeAttribute("readonly");
+                
+                document.getElementById('kendala').value = "";
+                document.getElementById('kendala').removeAttribute("readonly");
+                
+                document.getElementById('hasil_file').disabled = false;
+                document.getElementById('hasil_file').required = true;
+                
+                document.getElementById('target_tanggal').removeAttribute("readonly");
+                document.getElementById('target_tanggal').required = true;
+                
+                document.getElementById('target_deskripsi').value = "";
+                document.getElementById('target_deskripsi').removeAttribute("readonly");
+                document.getElementById('target_deskripsi').required = true;
+                
+                fieldLaporan.disabled = false;
+            }
+        }
+
+        function checkHolidayByDate(dateString) {
+            if (!dateString) return;
+            const dateObj = new Date(dateString);
             const dayOfWeek = dateObj.getDay();
+            
             if (dayOfWeek === 0 || dayOfWeek === 6) { 
                 document.getElementById('status').value = "Hari Libur";
-                document.getElementById('kegiatan').value = "Hari libur. Sistem otomatis mencatat jurnal libur.";
-                document.getElementById('kendala').value = "-";
-                document.getElementById('hasil_file').required = false; 
-                document.getElementById('target_tanggal').required = false;
-                document.getElementById('target_deskripsi').required = false;
-                document.getElementById('target_deskripsi').value = "-";
             } else { 
                 document.getElementById('status').value = "Hari Kerja";
-                document.getElementById('kegiatan').value = "";
-                document.getElementById('kendala').value = "";
-                document.getElementById('hasil_file').required = true; 
-                document.getElementById('target_tanggal').required = true;
-                document.getElementById('target_deskripsi').required = true;
-                document.getElementById('target_deskripsi').value = "";
             }
+            checkFormValidation();
         }
 
         function initializeForm() {
@@ -501,11 +553,20 @@
             const hours = String(now.getHours()).padStart(2, '0');
             const minutes = String(now.getMinutes()).padStart(2, '0');
             document.getElementById('waktu').value = `${hours}:${minutes}`;
-            applyHolidayLogic(now);
+            
+            checkHolidayByDate(`${year}-${month}-${day}`);
         }
 
         document.getElementById('tanggal').addEventListener('change', function() {
-            if(this.value) { applyHolidayLogic(new Date(this.value)); }
+            checkHolidayByDate(this.value);
+        });
+
+        document.getElementById('waktu').addEventListener('change', function() {
+            checkFormValidation();
+        });
+
+        document.getElementById('status').addEventListener('change', function() {
+            checkFormValidation();
         });
 
         document.getElementById('formLaporan').addEventListener('submit', async e => {
@@ -521,7 +582,7 @@
                 const fileInput = document.getElementById('hasil_file');
                 let fileB64 = "", fileName = "", mimeType = "";
 
-                if (fileInput.files.length > 0) {
+                if (!fileInput.disabled && fileInput.files.length > 0) {
                     const file = fileInput.files[0];
                     fileName = file.name;
                     mimeType = file.type;
@@ -563,6 +624,14 @@
                 document.getElementById('btnSubmit').disabled = false;
             }
         });
+    </script>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').then(() => {
+        console.log('Service Worker Registered');
+    });
+}
     </script>
 </body>
 </html>
