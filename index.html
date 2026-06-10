@@ -356,11 +356,17 @@
                                                 <label class="small mb-1 fw-bold text-dark">Kendala</label>
                                                 <textarea class="form-control bg-white" id="kendala" rows="2" placeholder="Isi '-' jika tidak ada kendala" required></textarea>
                                             </div>
-
-                                            <div class="mb-3">
-                                                <label class="small mb-1 fw-bold text-dark">Bukti/Hasil (Gambar)</label>
-                                                <input class="form-control" type="file" id="hasil_file" accept="image/*" required>
-                                            </div>
+<div class="mb-3">
+    <label class="small mb-1 fw-bold text-dark">Bukti/Hasil Laporan</label>
+    <div class="input-group shadow-sm rounded">
+        <span class="input-group-text bg-white text-primary border-end-0">
+            <i class="fas fa-camera"></i>
+        </span>
+        <input class="form-control border-start-0 ps-0" type="file" id="hasil_file" accept="image/*" required>
+    </div>
+    <small class="text-muted d-block mt-1">Ketuk untuk memotret langsung atau pilih dari galeri HP.</small>
+</div>
+                                            
 
                                             <!-- Bagian Target -->
                                             <div class="card bg-light border-start-lg border-start-info mb-4 mt-4 shadow-none">
