@@ -5,129 +5,110 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Kalender Target - JurnalKu</title>
-    <!-- Load CSS Bawaan SB Admin Pro -->
     <link href="css/styles.css" rel="stylesheet" />
-    <!-- FontAwesome -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous"></script>
-    <!-- FullCalendar JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+    
     <style>
         .fc-event { cursor: pointer; } 
-        /* Membuat kalender pas dengan tampilan kotak SB Admin */
         #calendar { min-height: 600px; }
-    </style>
-
-<style>
-        /* Fix Navbar Mobile Transparent */
         @media (max-width: 991.98px) {
             #navbarCollapse {
                 background-color: #ffffff;
-                position: absolute;
-                top: 3.625rem; 
-                left: 0;
-                width: 100%;
-                padding: 1rem 1.5rem;
-                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-                border-top: 1px solid #eaecf4;
-                z-index: 1050;
+                position: absolute; top: 3.625rem; left: 0; width: 100%;
+                padding: 1rem 1.5rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+                border-top: 1px solid #eaecf4; z-index: 1050;
             }
         }
     </style>
-
 </head>
-<body class="nav-fixed">
-    <!-- Topbar -->
-<nav class="topnav navbar navbar-expand-lg shadow navbar-light bg-white fixed-top">
+<body class="nav-fixed bg-light">
+    
+    <nav class="topnav navbar navbar-expand-lg shadow navbar-light bg-white fixed-top">
         <div class="container-xl px-4">
-            <a class="navbar-brand pe-3 fw-bold text-primary" href="index.html">JurnalKu Divisi IT</a>
+            <a class="navbar-brand pe-3 fw-bold text-primary" href="index.html">
+                <i data-feather="box" class="me-2"></i>JurnalKu Divisi IT
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <i data-feather="menu"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 mt-3 mt-lg-0 gap-2">
-                    <li class="nav-item"><a class="nav-link active fw-bold text-primary" href="index.html"> Dashboard & Job Desc</a></li>
-                    <li class="nav-item"><a class="nav-link" href="tabel.html"> Database Riwayat</a></li>
-                    <li class="nav-item"><a class="nav-link" href="absensi_labkom.html">Hasil Absensi</a></li>
-                    <li class="nav-item"><a class="nav-link" href="kalender.html">Kalender Target</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html"><i data-feather="monitor" class="me-1"></i> Dashboard & Job Desc</a></li>
+                    <li class="nav-item"><a class="nav-link" href="tabel.html"><i data-feather="database" class="me-1"></i> Database Riwayat</a></li>
+                    <li class="nav-item"><a class="nav-link active fw-bold text-primary" href="kalender.html"><i data-feather="calendar" class="me-1"></i> Kalender Target</a></li>
                 </ul>
-
+                <ul class="navbar-nav align-items-center ms-auto mt-2 mt-lg-0">
+                    <li class="nav-item dropdown no-caret dropdown-user">
+                        <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-bs-toggle="dropdown"><img class="img-fluid" src="assets/img/illustrations/profiles/profile-1.png" /></a>
+                        <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">
+                            <h6 class="dropdown-header d-flex align-items-center">
+                                <img class="dropdown-user-img" src="assets/img/illustrations/profiles/profile-1.png" />
+                                <div class="dropdown-user-details">
+                                    <div class="dropdown-user-details-name">Admin STPM</div>
+                                    <div class="dropdown-user-details-email">it.divisi@stpm.ac.id</div>
+                                </div>
+                            </h6>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
     
     <div style="padding-top: 3.625rem; width: 100%;">
         <main>
-                <!-- Page Header -->
-                <header class="page-header page-header-dark bg-info pb-10">
-                    <div class="container-xl px-4">
-                        <div class="page-header-content pt-4">
-                            <div class="row align-items-center justify-content-between">
-                                <div class="col-auto mt-4">
-                                    <h1 class="page-header-title">
-                                        <div class="page-header-icon"><i class="fa-solid fa-calendar-day"></i></div>
-                                        Kalender Target Pekerjaan
-                                    </h1>
-                                </div>
+            <header class="page-header page-header-dark bg-info pb-10">
+                <div class="container-xl px-4">
+                    <div class="page-header-content pt-4">
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-auto mt-4">
+                                <h1 class="page-header-title">
+                                    <div class="page-header-icon"><i data-feather="calendar"></i></div>
+                                    Kalender Target Pekerjaan
+                                </h1>
                             </div>
-                        </div>
-                    </div>
-                </header>
-                
-                <!-- Main Page Content -->
-                <div class="container-xl px-4 mt-n10 mb-5">
-                    <div class="card shadow-sm">
-                        <div class="card-body p-4">
-                            <!-- Loader -->
-                            <div id="calendar-loading" class="text-center py-5">
-                                <div class="spinner-border text-info" role="status"></div>
-                                <p class="mt-2">Menyiapkan kalender...</p>
-                            </div>
-                            <!-- Elemen Kalender -->
-                            <div id="calendar" class="d-none"></div> 
                         </div>
                     </div>
                 </div>
-            </main>
-        </div>
+            </header>
+            
+            <div class="container-xl px-4 mt-n10 mb-5">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-4">
+                        <div id="calendar-loading" class="text-center py-5">
+                            <div class="spinner-border text-info" role="status"></div>
+                            <p class="mt-2 text-muted">Menyiapkan kalender...</p>
+                        </div>
+                        <div id="calendar" class="d-none"></div> 
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="footer-admin mt-auto py-4 bg-white">
+            <div class="container-xl px-4 text-center text-muted">
+                <small>Copyright &copy; JurnalKu STPM Divisi IT 2026</small>
+            </div>
+        </footer>
     </div>
 
-    <!-- Modal Pop-up Untuk Detail Kalender -->
     <div class="modal fade" id="eventModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 shadow-lg">
                 <div class="modal-header bg-info text-white">
-                    <h5 class="modal-title"><i class="fa-solid fa-list-check me-2"></i>Rincian Agenda</h5>
+                    <h5 class="modal-title"><i class="fas fa-list-check me-2"></i>Rincian Agenda</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body p-4">
                     <h5 id="modalTitle" class="fw-bold text-info mb-4"></h5>
-                    
-                    <div class="d-flex align-items-center mb-2">
-                        <div class="icon-circle bg-light text-dark me-3"><i class="fa-regular fa-calendar"></i></div>
-                        <div>
-                            <div class="small text-muted">Tanggal Mulai</div>
-                            <div class="fw-bold" id="modalStart"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="d-flex align-items-center mb-4">
-                        <div class="icon-circle bg-light text-danger me-3"><i class="fa-regular fa-calendar-check"></i></div>
-                        <div>
-                            <div class="small text-muted">Target Selesai</div>
-                            <div class="fw-bold text-danger" id="modalEnd"></div>
-                        </div>
-                    </div>
-                    
+                    <div class="mb-2"><strong>Mulai:</strong> <span id="modalStart"></span></div>
+                    <div class="mb-4 text-danger"><strong>Target Selesai:</strong> <span id="modalEnd"></span></div>
                     <hr>
-                    <div class="mb-3">
-                        <label class="small fw-bold text-muted text-uppercase">Deskripsi Target Akhir:</label>
-                        <div id="modalTargetDesc" class="p-3 bg-light rounded mt-1"></div>
-                    </div>
-                    
-                    <div>
-                        <label class="small fw-bold text-muted text-uppercase">Kendala Awal:</label>
-                        <div id="modalKendala" class="p-3 bg-light rounded mt-1 text-danger"></div>
-                    </div>
+                    <label class="small fw-bold text-muted text-uppercase">Deskripsi Target Akhir:</label>
+                    <div id="modalTargetDesc" class="p-3 bg-light rounded mt-1 mb-3 border"></div>
+                    <label class="small fw-bold text-muted text-uppercase">Kendala Awal:</label>
+                    <div id="modalKendala" class="p-3 bg-light rounded mt-1 border text-danger"></div>
                 </div>
                 <div class="modal-footer bg-light">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
@@ -136,13 +117,22 @@
         </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="js/scripts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbzRbblL6gRF6Gks-PfszVW_MoeCINaMl34Dqd1WrJKywhkAGlGxsFD0mswjX80438iX5w/exec';
+        feather.replace();
+        
+        // PASTIKAN URL INI ADALAH URL DEPLOYMENT VERSI TERBARU ANDA
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxvzN5h0gegLccNaGSmunQmDPyD0h8xnlCg_ILCtfuObOgG0yW6CsLm5uJi-G1TlUqwUA/exec';
         let calendar;
+
+        // FUNGSI HELPER: Mencegah bug zona waktu (Timezone shift)
+        function formatLokalTanggal(dateObj) {
+            const y = dateObj.getFullYear();
+            const m = String(dateObj.getMonth() + 1).padStart(2, '0');
+            const d = String(dateObj.getDate()).padStart(2, '0');
+            return `${y}-${m}-${d}`;
+        }
 
         document.addEventListener('DOMContentLoaded', async function() {
             var calendarEl = document.getElementById('calendar');
@@ -152,15 +142,15 @@
                 headerToolbar: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,listWeek'
+                    right: 'dayGridMonth,listWeek'
                 },
                 events: [], 
                 eventClick: function(info) {
                     document.getElementById('modalTitle').innerText = info.event.title;
-                    
                     let startStr = info.event.start.toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'});
                     
-                    let endObj = new Date(info.event.endStr);
+                    let endObj = new Date(info.event.endStr || info.event.startStr);
+                    // FullCalendar mengatur tanggal end +1 hari di sistemnya, jadi kita kurangi 1 hari agar tampilan sesuai
                     endObj.setDate(endObj.getDate() - 1);
                     let endStr = endObj.toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'});
 
@@ -174,8 +164,6 @@
                 }
             });
             calendar.render();
-            
-            // Ambil data dan sembunyikan loader
             await fetchCalendarData();
         });
 
@@ -186,42 +174,42 @@
                 
                 if (dataObj.result === 'success') {
                     let calendarEvents = []; 
-                    
-                    // Palet warna yang cantik dan elegan (Bootstrap 5 / SB Admin Palette)
-                    const paletWarna = [
-                        '#0d6efd', // Primary (Biru Tua)
-                        '#198754', // Success (Hijau)
-                        '#6f42c1', // Purple (Ungu)
-                        '#f6c23e', // Warning (Kuning/Oranye)
-                        '#e74a3b', // Danger (Merah)
-                        '#0dcaf0', // Info (Biru Muda)
-                        '#e83e8c', // Pink
-                        '#20c997'  // Teal (Hijau Kebiruan)
-                    ];
-                    
-                    let indeksWarna = 0; // Variabel untuk merotasi warna
+                    const paletWarna = ['#0d6efd', '#198754', '#6f42c1', '#f6c23e', '#e74a3b', '#0dcaf0', '#e83e8c', '#20c997'];
+                    let indeksWarna = 0;
 
                     dataObj.data.forEach(row => {
-                        // Cek apakah bukan hari libur dan punya target tanggal
-                        if(row[4] !== "Hari Libur" && row[7] && row[7] !== "-") {
-                            let endDate = new Date(row[7]);
-                            endDate.setDate(endDate.getDate() + 1); 
+                        // Cek apakah data ini adalah Hari Kerja dan Memiliki Tanggal Target
+                        if(row[4] !== "Hari Libur" && row[4] !== "Jam Istirahat") {
                             
-                            // Ambil warna sesuai urutan, jika sudah habis kembali ke awal (modulo)
-                            let warnaDipilih = paletWarna[indeksWarna % paletWarna.length];
-                            indeksWarna++; // Tambah 1 untuk agenda berikutnya
+                            let rawStartDate = row[0]; // Kolom A: Tanggal
+                            let rawTargetDate = row[6]; // Kolom G: Tanggal Target
 
-                            calendarEvents.push({
-                                title: row[3], 
-                                start: row[0], 
-                                end: endDate.toISOString().split('T')[0],
-                                allDay: true, 
-                                backgroundColor: warnaDipilih, 
-                                borderColor: warnaDipilih,
-                                // Agar teks tetap kontras saat background warna kuning/terang
-                                textColor: (warnaDipilih === '#f6c23e' || warnaDipilih === '#0dcaf0') ? '#000000' : '#ffffff',
-                                extendedProps: { targetDesc: row[8], kendala: row[5] }
-                            });
+                            // Pastikan ada tanggal dan bukan strip "-"
+                            if (rawTargetDate && rawTargetDate.trim() !== "-" && rawTargetDate.trim() !== "") {
+                                let startDate = new Date(rawStartDate);
+                                let endDate = new Date(rawTargetDate);
+
+                                // Validasi agar kalender tidak crash bila ada format tanggal yg salah di Excel
+                                if (!isNaN(endDate.getTime()) && !isNaN(startDate.getTime())) {
+                                    
+                                    endDate.setDate(endDate.getDate() + 1); 
+                                    
+                                    let warnaDipilih = paletWarna[indeksWarna % paletWarna.length];
+                                    indeksWarna++;
+
+                                    // Memasukkan data dengan fungsi formatLokalTanggal() agar 100% AMAN dari bug kemunduran hari
+                                    calendarEvents.push({
+                                        title: row[3], 
+                                        start: formatLokalTanggal(startDate), 
+                                        end: formatLokalTanggal(endDate),
+                                        allDay: true, 
+                                        backgroundColor: warnaDipilih, 
+                                        borderColor: warnaDipilih,
+                                        textColor: (warnaDipilih === '#f6c23e' || warnaDipilih === '#0dcaf0') ? '#000000' : '#ffffff',
+                                        extendedProps: { targetDesc: row[7], kendala: row[5] }
+                                    });
+                                }
+                            }
                         }
                     });
 
@@ -229,10 +217,12 @@
                     document.getElementById('calendar-loading').classList.add('d-none');
                     document.getElementById('calendar').classList.remove('d-none');
                     calendar.render(); 
+                } else {
+                    throw new Error("Gagal mengambil data dari Google Apps Script.");
                 }
             } catch (error) { 
                 console.error("Gagal memuat data:", error);
-                document.getElementById('calendar-loading').innerHTML = '<span class="text-danger fw-bold"><i class="fas fa-exclamation-triangle me-2"></i>Gagal terhubung ke Database Spreadsheet.</span>';
+                document.getElementById('calendar-loading').innerHTML = '<span class="text-danger fw-bold"><i class="fas fa-exclamation-triangle me-2"></i>Gagal terhubung ke Database. (Cek Koneksi atau Format Data)</span>';
             }
         }
     </script>

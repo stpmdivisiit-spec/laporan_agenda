@@ -6,13 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Dashboard & Job Desc - JurnalKu</title>
     <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0d6efd">
-    <!-- Load CSS SB Admin Pro -->
+    <meta name="theme-color" content="#0d6efd">
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
     
-    <!-- Perbaikan Navbar Mobile -->
     <style>
         @media (max-width: 991.98px) {
             #navbarCollapse {
@@ -32,7 +30,6 @@
 </head>
 <body class="nav-fixed bg-light">
     
-    <!-- Top Navbar -->
     <nav class="topnav navbar navbar-expand-lg shadow navbar-light bg-white fixed-top">
         <div class="container-xl px-4">
             <a class="navbar-brand pe-3 fw-bold text-primary" href="index.html">
@@ -42,8 +39,7 @@
                 <i data-feather="menu"></i>
             </button>
             
-            <!-- Menu Utama (Disembunyikan jika belum login) -->
-            <div class="collapse navbar-collapse d-none" id="navbarCollapse">
+            <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 mt-3 mt-lg-0 gap-2">
                     <li class="nav-item"><a class="nav-link active fw-bold text-primary" href="index.html"><i data-feather="monitor" class="me-1"></i> Dashboard & Job Desc</a></li>
                     <li class="nav-item"><a class="nav-link" href="tabel.html"><i data-feather="database" class="me-1"></i> Database Riwayat</a></li>
@@ -60,14 +56,9 @@
                                 <img class="dropdown-user-img" src="assets/img/illustrations/profiles/profile-1.png" />
                                 <div class="dropdown-user-details">
                                     <div class="dropdown-user-details-name">Admin STPM</div>
-                                    <div class="dropdown-user-details-email">Sesi: <span id="sessionTimer" class="fw-bold text-danger">05:00</span></div>
+                                    <div class="dropdown-user-details-email">it.divisi@stpm.ac.id</div>
                                 </div>
                             </h6>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#" onclick="logoutUser()">
-                                <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
-                                Logout
-                            </a>
                         </div>
                     </li>
                 </ul>
@@ -77,41 +68,8 @@
     
     <div style="padding-top: 3.625rem; width: 100%;">
         
-        <!-- ======================= -->
-        <!-- SECTION 1: FORM LOGIN   -->
-        <!-- ======================= -->
-        <div id="loginSection" class="container-xl px-4 mt-5">
-            <div class="row justify-content-center">
-                <div class="col-lg-5 col-md-7">
-                    <div class="card shadow-lg border-0 rounded-lg mt-5">
-                        <div class="card-header justify-content-center bg-primary text-white text-center py-4">
-                            <h3 class="fw-bold my-2"><i data-feather="lock" class="me-2"></i> Otorisasi Akses</h3>
-                        </div>
-                        <div class="card-body p-4">
-                            <div id="loginError" class="alert alert-danger d-none small">Username atau Password salah!</div>
-                            <form id="formLogin">
-                                <div class="mb-3">
-                                    <label class="small mb-1 fw-bold text-dark">Username</label>
-                                    <input class="form-control" id="inputUsername" type="text" placeholder="Masukkan username..." required />
-                                </div>
-                                <div class="mb-4">
-                                    <label class="small mb-1 fw-bold text-dark">Password</label>
-                                    <input class="form-control" id="inputPassword" type="password" placeholder="Masukkan password..." required />
-                                </div>
-                                <button class="btn btn-primary w-100 fw-bold py-2" type="submit">Login ke Sistem</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ======================= -->
-        <!-- SECTION 2: MAIN DASHBOARD -->
-        <!-- ======================= -->
-        <div id="mainContent" class="d-none">
+        <div id="mainContent">
             <main>
-                <!-- Hero Landing Page -->
                 <div class="container-xl px-4 mt-5 mb-5 text-center">
                     <h1 class="display-5 fw-bold text-dark mb-2">Deskripsi Pekerjaan</h1>
                     <p class="lead text-muted mb-4">(Job Description Document)</p>
@@ -121,10 +79,8 @@
                     </div>
                 </div>
 
-                <!-- Konten Job Description -->
                 <div class="container-xl px-4 mb-5">
                     
-                    <!-- Row 1: Identitas & Tujuan -->
                     <div class="row gx-4 mb-4">
                         <div class="col-lg-6 mb-4 mb-lg-0">
                             <div class="card shadow-sm h-100 border-top-lg border-top-primary">
@@ -149,7 +105,6 @@
                         </div>
                     </div>
 
-                    <!-- Row 2: Bobot Kerja & Kompetensi -->
                     <div class="row gx-4 mb-4">
                         <div class="col-lg-5 mb-4 mb-lg-0">
                             <div class="card shadow-sm h-100 border-top-lg border-top-success">
@@ -161,7 +116,7 @@
                                             <span class="text-success fw-bold">60%</span>
                                         </div>
                                         <div class="progress rounded-pill mb-3" style="height: 1rem;">
-                                            <div class="progress-bar bg-success" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: 60%"></div>
                                         </div>
                                     </div>
                                     <div>
@@ -170,7 +125,7 @@
                                             <span class="text-primary fw-bold">40%</span>
                                         </div>
                                         <div class="progress rounded-pill" style="height: 1rem;">
-                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 40%"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -200,15 +155,12 @@
                         </div>
                     </div>
 
-                    <!-- Row 3: Tanggung Jawab Utama -->
                     <div class="card shadow-sm mb-4 border-top-lg border-top-danger">
                         <div class="card-header bg-white fw-bold text-dark"><i data-feather="briefcase" class="me-2 text-danger"></i>IV. Tanggung Jawab Utama</div>
                         <div class="card-body">
                             <div class="row">
-                                <!-- IT -->
                                 <div class="col-md-6 border-end-md border-light">
                                     <h5 class="text-primary fw-bold mb-4 text-center">A. BIDANG TEKNOLOGI INFORMASI</h5>
-                                    
                                     <div class="p-3 border rounded bg-light mb-3 border-start-lg border-start-primary">
                                         <h6 class="fw-bold text-dark"><i data-feather="wifi" class="me-2 small text-primary"></i>1. Infrastruktur & Keamanan</h6>
                                         <p class="small text-muted mb-0">Mengelola internet, MikroTik, Switch, AP, Server, CCTV. Troubleshooting VLAN, hotspot, firewall. Backup konfigurasi.</p>
@@ -226,10 +178,8 @@
                                         <p class="small text-muted mb-0">Membantu digitalisasi administrasi, mengembangkan aplikasi internal & membuat laporan.</p>
                                     </div>
                                 </div>
-                                <!-- Guru -->
                                 <div class="col-md-6 pt-4 pt-md-0">
                                     <h5 class="text-success fw-bold mb-4 text-center">B. BIDANG AKADEMIK (GURU)</h5>
-                                    
                                     <div class="p-3 border rounded bg-light mb-3 border-start-lg border-start-success">
                                         <h6 class="fw-bold text-dark"><i data-feather="book" class="me-2 small text-success"></i>1. Kegiatan Mengajar</h6>
                                         <p class="small text-muted mb-0">Menyusun perangkat (Modul, RPP, ujian). Melaksanakan KBM sesuai jadwal. Evaluasi & input nilai siswa tepat waktu.</p>
@@ -243,7 +193,6 @@
                         </div>
                     </div>
 
-                    <!-- Row 4: Manajemen Waktu & KPI -->
                     <div class="row gx-4 mb-5">
                         <div class="col-lg-6 mb-4 mb-lg-0">
                             <div class="card shadow-sm h-100 border-top-lg border-top-secondary">
@@ -284,7 +233,6 @@
                                     <div class="p-3 border rounded bg-light mb-4 border-start-lg border-start-warning small text-dark">
                                         <strong>Guru:</strong> Kehadiran 100%, Ketepatan waktu administrasi kelas, Tingkat pemahaman siswa.
                                     </div>
-                                    
                                     <hr class="border-light mt-5">
                                     <div class="text-center small text-muted mt-4">
                                         <p class="mb-4">Dokumen ini berlaku sejak tanggal ditetapkan.</p>
@@ -306,13 +254,11 @@
                         </div>
                     </div>
 
-                    <!-- Divider -->
                     <div class="text-center my-5 pt-4" id="formSection">
-                        <h3 class="text-dark fw-bold">Saatnya Mengisi Jurnal Anda</h3>
+                        <h3 class="text-dark fw-bold">Formulir Pengisian</h3>
                         <i data-feather="chevron-down" class="text-primary mt-2" style="width: 3rem; height: 3rem;"></i>
                     </div>
 
-                    <!-- SECTION 3: FORM LAPORAN -->
                     <div class="row justify-content-center mb-5">
                         <div class="col-xl-8 col-lg-10">
                             <div class="card shadow-sm mb-4 border-start-lg border-start-primary">
@@ -321,7 +267,7 @@
                                     <div id="alertSuccess" class="alert bg-success text-white border-0 alert-icon d-none shadow-sm" role="alert">
                                         <button class="btn-close btn-close-white" type="button" data-bs-dismiss="alert"></button>
                                         <div class="alert-icon-aside"><i data-feather="check-circle"></i></div>
-                                        <div class="alert-icon-content"><strong>Sukses!</strong> Laporan tersimpan dan Kalender diperbarui.</div>
+                                        <div class="alert-icon-content"><strong>Sukses!</strong> Laporan tersimpan.</div>
                                     </div>
                                     <div id="alertError" class="alert bg-danger text-white border-0 d-none" role="alert"></div>
 
@@ -342,10 +288,10 @@
                                             <select class="form-select" id="status" required>
                                                 <option value="Hari Kerja">Hari Kerja</option>
                                                 <option value="Hari Libur">Hari Libur</option>
+                                                <option value="Jam Istirahat">Jam Istirahat</option>
                                             </select>
                                         </div>
 
-                                        <!-- INPUTS YANG AKAN DI-LOCK SAAT HARI LIBUR -->
                                         <fieldset id="fieldLaporan">
                                             <div class="mb-3">
                                                 <label class="small mb-1 fw-bold text-dark">Kegiatan / Agenda</label>
@@ -356,19 +302,7 @@
                                                 <label class="small mb-1 fw-bold text-dark">Kendala</label>
                                                 <textarea class="form-control bg-white" id="kendala" rows="2" placeholder="Isi '-' jika tidak ada kendala" required></textarea>
                                             </div>
-<div class="mb-3">
-    <label class="small mb-1 fw-bold text-dark">Bukti/Hasil Laporan</label>
-    <div class="input-group shadow-sm rounded">
-        <span class="input-group-text bg-white text-primary border-end-0">
-            <i class="fas fa-camera"></i>
-        </span>
-        <input class="form-control border-start-0 ps-0" type="file" id="hasil_file" accept="image/*" required>
-    </div>
-    <small class="text-muted d-block mt-1">Ketuk untuk memotret langsung atau pilih dari galeri HP.</small>
-</div>
-                                            
 
-                                            <!-- Bagian Target -->
                                             <div class="card bg-light border-start-lg border-start-info mb-4 mt-4 shadow-none">
                                                 <div class="card-body">
                                                     <h6 class="fw-bold text-info mb-3"><i data-feather="target" class="me-2"></i>Target Penyelesaian (Sinkron Kalender)</h6>
@@ -390,6 +324,12 @@
                                             <span id="btnText"><i class="fas fa-paper-plane me-2"></i> Kirim & Jadwalkan Laporan</span>
                                             <span id="btnLoading" class="spinner-border spinner-border-sm d-none" role="status"></span>
                                         </button>
+
+                                        <button type="button" class="btn btn-outline-danger w-100 fw-bold py-2 mt-3" id="btnSelesaiKerja" onclick="selesaiKerja()">
+                                            <i class="fas fa-sign-out-alt me-2"></i> Akhiri Jam Kerja (Waktu Pulang)
+                                        </button>
+                                        <small class="text-center text-muted d-block mt-2">Sistem akan otomatis mencatat waktu saat ini sebagai akhir tugas sebelumnya.</small>
+
                                     </form>
                                 </div>
                             </div>
@@ -407,80 +347,15 @@
         </div>
     </div>
 
-    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
         feather.replace();
 
-        // --- SISTEM AUTENTIKASI 5 MENIT ---
-        const LOGIN_USER = "oznovel";
-        const LOGIN_PASS = "novel"; 
-        const SESSION_DURATION = 5 * 60 * 1000; 
-        let authCheckInterval;
-
-        function checkAuthStatus() {
-            const loginTime = localStorage.getItem('jurnalku_auth_time');
-            const now = Date.now();
-
-            if (loginTime && (now - parseInt(loginTime) < SESSION_DURATION)) {
-                document.getElementById('loginSection').classList.add('d-none');
-                document.getElementById('mainContent').classList.remove('d-none');
-                document.getElementById('navbarCollapse').classList.remove('d-none');
-                
-                const remaining = SESSION_DURATION - (now - parseInt(loginTime));
-                let minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
-                let seconds = Math.floor((remaining % (1000 * 60)) / 1000);
-                document.getElementById('sessionTimer').innerText = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            } else {
-                logoutUser();
-            }
-        }
-
-        document.getElementById('formLogin').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const userVal = document.getElementById('inputUsername').value;
-            const passVal = document.getElementById('inputPassword').value;
-
-            if (userVal === LOGIN_USER && passVal === LOGIN_PASS) {
-                localStorage.setItem('jurnalku_auth_time', Date.now().toString());
-                document.getElementById('loginError').classList.add('d-none');
-                checkAuthStatus();
-                authCheckInterval = setInterval(checkAuthStatus, 1000);
-                initializeForm();
-            } else {
-                document.getElementById('loginError').classList.remove('d-none');
-            }
-        });
-
-        function logoutUser() {
-            localStorage.removeItem('jurnalku_auth_time');
-            clearInterval(authCheckInterval);
-            document.getElementById('mainContent').classList.add('d-none');
-            document.getElementById('navbarCollapse').classList.add('d-none');
-            document.getElementById('loginSection').classList.remove('d-none');
-            document.getElementById('inputPassword').value = '';
-            window.scrollTo(0,0);
-        }
-
-        if (localStorage.getItem('jurnalku_auth_time')) {
-            authCheckInterval = setInterval(checkAuthStatus, 1000);
-            checkAuthStatus();
-        } else {
-            logoutUser();
-        }
-
-        // --- SISTEM APPS SCRIPT ---
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbzRbblL6gRF6Gks-PfszVW_MoeCINaMl34Dqd1WrJKywhkAGlGxsFD0mswjX80438iX5w/exec';
+        // INI ADALAH URL DEPLOYMENT VERSI 21 ANDA YANG BARU
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxvzN5h0gegLccNaGSmunQmDPyD0h8xnlCg_ILCtfuObOgG0yW6CsLm5uJi-G1TlUqwUA/exec';
         
-        const toBase64 = file => new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = error => reject(error);
-        });
-
-        // FUNGSI UNTUK MEMERIKSA STATUS VALIDASI FORM
         function checkFormValidation() {
             const tanggalVal = document.getElementById('tanggal').value;
             const waktuVal = document.getElementById('waktu').value;
@@ -498,40 +373,30 @@
                 btnSubmit.disabled = false;
             }
 
-            if (statusVal === "Hari Libur") {
-                document.getElementById('kegiatan').value = "Hari libur. Sistem otomatis mencatat jurnal libur.";
+            if (statusVal === "Hari Libur" || statusVal === "Jam Istirahat") {
+                if (statusVal === "Hari Libur") {
+                    document.getElementById('kegiatan').value = "Hari libur. Sistem otomatis mencatat jurnal libur.";
+                } else {
+                    document.getElementById('kegiatan').value = "Waktu istirahat / Jeda kerja.";
+                }
                 document.getElementById('kegiatan').setAttribute("readonly", true);
-                
                 document.getElementById('kendala').value = "-";
                 document.getElementById('kendala').setAttribute("readonly", true);
-                
-                document.getElementById('hasil_file').disabled = true;
-                document.getElementById('hasil_file').required = false;
-                
                 document.getElementById('target_tanggal').setAttribute("readonly", true);
                 document.getElementById('target_tanggal').required = false;
-                
                 document.getElementById('target_deskripsi').value = "-";
                 document.getElementById('target_deskripsi').setAttribute("readonly", true);
                 document.getElementById('target_deskripsi').required = false;
-            } 
-            else {
+            } else {
                 document.getElementById('kegiatan').value = "";
                 document.getElementById('kegiatan').removeAttribute("readonly");
-                
                 document.getElementById('kendala').value = "";
                 document.getElementById('kendala').removeAttribute("readonly");
-                
-                document.getElementById('hasil_file').disabled = false;
-                document.getElementById('hasil_file').required = true;
-                
                 document.getElementById('target_tanggal').removeAttribute("readonly");
                 document.getElementById('target_tanggal').required = true;
-                
                 document.getElementById('target_deskripsi').value = "";
                 document.getElementById('target_deskripsi').removeAttribute("readonly");
                 document.getElementById('target_deskripsi').required = true;
-                
                 fieldLaporan.disabled = false;
             }
         }
@@ -541,10 +406,12 @@
             const dateObj = new Date(dateString);
             const dayOfWeek = dateObj.getDay();
             
-            if (dayOfWeek === 0 || dayOfWeek === 6) { 
-                document.getElementById('status').value = "Hari Libur";
-            } else { 
-                document.getElementById('status').value = "Hari Kerja";
+            if (document.getElementById('status').value !== "Jam Istirahat") {
+                if (dayOfWeek === 0 || dayOfWeek === 6) { 
+                    document.getElementById('status').value = "Hari Libur";
+                } else { 
+                    document.getElementById('status').value = "Hari Kerja";
+                }
             }
             checkFormValidation();
         }
@@ -563,17 +430,11 @@
             checkHolidayByDate(`${year}-${month}-${day}`);
         }
 
-        document.getElementById('tanggal').addEventListener('change', function() {
-            checkHolidayByDate(this.value);
-        });
+        window.onload = initializeForm;
 
-        document.getElementById('waktu').addEventListener('change', function() {
-            checkFormValidation();
-        });
-
-        document.getElementById('status').addEventListener('change', function() {
-            checkFormValidation();
-        });
+        document.getElementById('tanggal').addEventListener('change', function() { checkHolidayByDate(this.value); });
+        document.getElementById('waktu').addEventListener('change', function() { checkFormValidation(); });
+        document.getElementById('status').addEventListener('change', function() { checkFormValidation(); });
 
         document.getElementById('formLaporan').addEventListener('submit', async e => {
             e.preventDefault();
@@ -581,32 +442,22 @@
             document.getElementById('btnText').classList.add('d-none');
             document.getElementById('btnLoading').classList.remove('d-none');
             document.getElementById('btnSubmit').disabled = true;
+            document.getElementById('btnSelesaiKerja').disabled = true;
             document.getElementById('alertError').classList.add('d-none');
             document.getElementById('alertSuccess').classList.add('d-none');
 
+            // Data Murni, Sesuai urutan 8 Kolom
+            const payload = {
+                tanggal: document.getElementById('tanggal').value,
+                waktu: document.getElementById('waktu').value,
+                status: document.getElementById('status').value,
+                kegiatan: document.getElementById('kegiatan').value,
+                kendala: document.getElementById('kendala').value,
+                targetTanggal: document.getElementById('target_tanggal').value,
+                targetDeskripsi: document.getElementById('target_deskripsi').value
+            };
+
             try {
-                const fileInput = document.getElementById('hasil_file');
-                let fileB64 = "", fileName = "", mimeType = "";
-
-                if (!fileInput.disabled && fileInput.files.length > 0) {
-                    const file = fileInput.files[0];
-                    fileName = file.name;
-                    mimeType = file.type;
-                    const base64Data = await toBase64(file);
-                    fileB64 = base64Data.split(',')[1];
-                }
-
-                const payload = {
-                    tanggal: document.getElementById('tanggal').value,
-                    waktu: document.getElementById('waktu').value,
-                    status: document.getElementById('status').value,
-                    kegiatan: document.getElementById('kegiatan').value,
-                    kendala: document.getElementById('kendala').value,
-                    targetTanggal: document.getElementById('target_tanggal').value,
-                    targetDeskripsi: document.getElementById('target_deskripsi').value,
-                    fileB64: fileB64, fileName: fileName, mimeType: mimeType
-                };
-
                 const response = await fetch(scriptURL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
@@ -628,16 +479,67 @@
                 document.getElementById('btnText').classList.remove('d-none');
                 document.getElementById('btnLoading').classList.add('d-none');
                 document.getElementById('btnSubmit').disabled = false;
+                document.getElementById('btnSelesaiKerja').disabled = false;
             }
         });
+
+        async function selesaiKerja() {
+            if (!confirm("Apakah Anda yakin ingin mengakhiri jam kerja hari ini? Sistem otomatis akan mencatat waktu pulang Anda.")) return;
+
+            const btnSelesai = document.getElementById('btnSelesaiKerja');
+            const originalText = btnSelesai.innerHTML;
+            
+            btnSelesai.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Memproses Waktu Pulang...';
+            btnSelesai.disabled = true;
+            document.getElementById('btnSubmit').disabled = true;
+
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+
+            const payload = {
+                tanggal: `${year}-${month}-${day}`,
+                waktu: `${hours}:${minutes}`,
+                status: document.getElementById('status').value, 
+                kegiatan: "Selesai Kerja / Waktu Pulang",
+                kendala: "-",
+                targetTanggal: "-",
+                targetDeskripsi: "-"
+            };
+
+            try {
+                const response = await fetch(scriptURL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+                if (data.result === 'success') {
+                    alert("Waktu pulang berhasil dicatat! Terima kasih atas kerja keras Anda hari ini.");
+                    initializeForm(); 
+                } else {
+                    throw new Error(data.message);
+                }
+            } catch (error) {
+                alert("Gagal mencatat waktu pulang: " + error.message);
+            } finally {
+                btnSelesai.innerHTML = originalText;
+                btnSelesai.disabled = false;
+                document.getElementById('btnSubmit').disabled = false;
+            }
+        }
     </script>
 
     <script>
         if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js').then(() => {
-        console.log('Service Worker Registered');
-    });
-}
+            navigator.serviceWorker.register('sw.js').then(() => {
+                console.log('Service Worker Registered');
+            });
+        }
     </script>
 </body>
 </html>
